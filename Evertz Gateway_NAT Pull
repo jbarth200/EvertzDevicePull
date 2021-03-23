@@ -1,0 +1,1107 @@
+import requests
+
+import time
+import csv
+import locale
+import pandas as pd
+import json
+import pandas as pd
+from pandas import ExcelWriter
+import numpy as np
+import openpyxl
+
+
+from tkinter import *
+
+import pandas as pd
+import webbrowser
+
+root = Tk()
+root.title("Evertz Media Gateway Pull")
+
+##Creating Entries
+Group = Entry(root, width=50)
+Group.grid(row=0, column=5)
+
+Group2 = Entry(root, width=50)
+Group2.grid(row=1, column=5)
+
+user_input = Group.get()
+
+user_input2 = Group2.get()
+
+def Gatway_Input():
+
+    if len(user_input) > 0:
+        return Gateway_Pull
+
+
+
+
+def Gateway_Pull():
+
+    streams = 13
+    group_1_status = list()
+    tii = 0
+    print("OKAY HERE WE GO")
+    user_input = Group.get()
+    group_1_a_source_list = []
+    group_2_a_source_list = []
+    group_3_a_source_list = []
+    group_4_a_source_list = []
+    group_5_a_source_list = []
+    group_6_a_source_list = []
+    group_7_a_source_list = []
+    group_8_a_source_list = []
+    group_9_a_source_list = []
+    group_10_a_source_list = []
+
+    group_1_b_source_list = []
+    group_2_b_source_list = []
+    group_3_b_source_list = []
+    group_4_b_source_list = []
+    group_5_b_source_list = []
+    group_6_b_source_list = []
+    group_7_b_source_list = []
+    group_8_b_source_list = []
+    group_9_b_source_list = []
+    group_10_b_source_list = []
+
+    group_1_a_mcast_list = []
+    group_2_a_mcast_list = []
+    group_3_a_mcast_list = []
+    group_4_a_mcast_list = []
+    group_5_a_mcast_list = []
+    group_6_a_mcast_list = []
+    group_7_a_mcast_list = []
+    group_8_a_mcast_list = []
+    group_9_a_mcast_list = []
+    group_10_a_mcast_list = []
+
+
+    group_1_b_mcast_list = []
+    group_2_b_mcast_list = []
+    group_3_b_mcast_list = []
+    group_4_b_mcast_list = []
+    group_5_b_mcast_list = []
+    group_6_b_mcast_list = []
+    group_7_b_mcast_list = []
+    group_8_b_mcast_list = []
+    group_9_b_mcast_list = []
+    group_10_b_mcast_list = []
+
+    group_1_mcast_out_list = []
+    group_2_mcast_out_list = []
+    group_3_mcast_out_list = []
+    group_4_mcast_out_list = []
+    group_5_mcast_out_list = []
+    group_6_mcast_out_list = []
+    group_7_mcast_out_list = []
+    group_8_mcast_out_list = []
+    group_9_mcast_out_list = []
+    group_10_mcast_out_list = []
+
+    group_1_stream_rate_list = []
+    group_2_stream_rate_list = []
+    group_3_stream_rate_list = []
+    group_4_stream_rate_list = []
+    group_5_stream_rate_list = []
+    group_6_stream_rate_list = []
+    group_7_stream_rate_list = []
+    group_8_stream_rate_list = []
+    group_9_stream_rate_list = []
+    group_10_stream_rate_list = []
+
+    group_1_stream_a_presence_list = []
+    group_2_stream_a_presence_list = []
+    group_3_stream_a_presence_list = []
+    group_4_stream_a_presence_list = []
+    group_5_stream_a_presence_list = []
+    group_6_stream_a_presence_list = []
+    group_7_stream_a_presence_list = []
+    group_8_stream_a_presence_list = []
+    group_9_stream_a_presence_list = []
+    group_10_stream_a_presence_list = []
+
+
+
+    group_1_stream_b_presence_list = []
+    group_2_stream_b_presence_list = []
+    group_3_stream_b_presence_list = []
+    group_4_stream_b_presence_list = []
+    group_5_stream_b_presence_list = []
+    group_6_stream_b_presence_list = []
+    group_7_stream_b_presence_list = []
+    group_8_stream_b_presence_list = []
+    group_9_stream_b_presence_list = []
+    group_10_stream_b_presence_list = []
+    print("OKAY HERE WE GO")
+
+    for i in range(streams):
+
+        tii += 1
+        group_1_a_source = requests.get(f"{user_input}//htdocs/v.api/apis/EV/GET/parameters/960.0.{tii}")
+        group_2_a_source = requests.get(f"{user_input}//htdocs/v.api/apis/EV/GET/parameters/960.1.{tii}")
+        group_3_a_source = requests.get(f"{user_input}//htdocs/v.api/apis/EV/GET/parameters/960.2.{tii}")
+        group_4_a_source = requests.get(f"{user_input}//htdocs/v.api/apis/EV/GET/parameters/960.3.{tii}")
+        group_5_a_source = requests.get(f"{user_input}//htdocs/v.api/apis/EV/GET/parameters/960.4.{tii}")
+        group_6_a_source = requests.get(f"{user_input}//htdocs/v.api/apis/EV/GET/parameters/960.5.{tii}")
+        group_7_a_source = requests.get(f"{user_input}//htdocs/v.api/apis/EV/GET/parameters/960.6.{tii}")
+        group_8_a_source = requests.get(f"{user_input}//htdocs/v.api/apis/EV/GET/parameters/960.7.{tii}")
+        group_9_a_source = requests.get(f"{user_input}//htdocs/v.api/apis/EV/GET/parameters/960.8.{tii}")
+        group_10_a_source = requests.get(f"{user_input}//htdocs/v.api/apis/EV/GET/parameters/960.9.{tii}")
+        group_1_a_source_return = group_1_a_source.json()
+        group_2_a_source_return = group_2_a_source.json()
+        group_3_a_source_return = group_3_a_source.json()
+        group_4_a_source_return = group_4_a_source.json()
+        group_5_a_source_return = group_5_a_source.json()
+        group_6_a_source_return = group_6_a_source.json()
+        group_7_a_source_return = group_7_a_source.json()
+        group_8_a_source_return = group_8_a_source.json()
+        group_9_a_source_return = group_9_a_source.json()
+        group_10_a_source_return = group_10_a_source.json()
+        group_1_ip_value_a = group_1_a_source_return['value']
+        group_2_ip_value_a = group_2_a_source_return['value']
+        group_3_ip_value_a = group_3_a_source_return['value']
+        group_4_ip_value_a = group_4_a_source_return['value']
+        group_5_ip_value_a = group_5_a_source_return['value']
+        group_6_ip_value_a = group_6_a_source_return['value']
+        group_7_ip_value_a = group_7_a_source_return['value']
+        group_8_ip_value_a = group_8_a_source_return['value']
+        group_9_ip_value_a = group_9_a_source_return['value']
+        group_10_ip_value_a = group_10_a_source_return['value']
+
+        group_1_a_source_list.append(group_1_ip_value_a)
+        group_2_a_source_list.append(group_2_ip_value_a)
+        group_3_a_source_list.append(group_3_ip_value_a)
+        group_4_a_source_list.append(group_4_ip_value_a)
+        group_5_a_source_list.append(group_5_ip_value_a)
+        group_6_a_source_list.append(group_6_ip_value_a)
+        group_7_a_source_list.append(group_7_ip_value_a)
+        group_8_a_source_list.append(group_8_ip_value_a)
+        group_9_a_source_list.append(group_9_ip_value_a)
+        group_10_a_source_list.append(group_10_ip_value_a)
+
+        print("OKAY HERE WE GO")
+        group_1_b_source = requests.get(f"{user_input}//htdocs/v.api/apis/EV/GET/parameters/968.0.{tii}")
+        group_2_b_source = requests.get(f"{user_input}//htdocs/v.api/apis/EV/GET/parameters/968.1.{tii}")
+        group_3_b_source = requests.get(f"{user_input}//htdocs/v.api/apis/EV/GET/parameters/968.2.{tii}")
+        group_4_b_source = requests.get(f"{user_input}//htdocs/v.api/apis/EV/GET/parameters/968.3.{tii}")
+        group_5_b_source = requests.get(f"{user_input}//htdocs/v.api/apis/EV/GET/parameters/968.4.{tii}")
+        group_6_b_source = requests.get(f"{user_input}//htdocs/v.api/apis/EV/GET/parameters/968.5.{tii}")
+        group_7_b_source = requests.get(f"{user_input}//htdocs/v.api/apis/EV/GET/parameters/968.6.{tii}")
+        group_8_b_source = requests.get(f"{user_input}//htdocs/v.api/apis/EV/GET/parameters/968.7.{tii}")
+        group_9_b_source = requests.get(f"{user_input}//htdocs/v.api/apis/EV/GET/parameters/968.8.{tii}")
+        group_10_b_source = requests.get(f"{user_input}//htdocs/v.api/apis/EV/GET/parameters/968.9.{tii}")
+        group_1_b_source_return = group_1_b_source.json()
+        group_2_b_source_return = group_2_b_source.json()
+        group_3_b_source_return = group_3_b_source.json()
+        group_4_b_source_return = group_4_b_source.json()
+        group_5_b_source_return = group_5_b_source.json()
+        group_6_b_source_return = group_6_b_source.json()
+        group_7_b_source_return = group_7_b_source.json()
+        group_8_b_source_return = group_8_b_source.json()
+        group_9_b_source_return = group_9_b_source.json()
+        group_10_b_source_return = group_10_b_source.json()
+        group_1_ip_value_b = group_1_b_source_return['value']
+        group_2_ip_value_b = group_2_b_source_return['value']
+        group_3_ip_value_b = group_3_b_source_return['value']
+        group_4_ip_value_b = group_4_b_source_return['value']
+        group_5_ip_value_b = group_5_b_source_return['value']
+        group_6_ip_value_b = group_6_b_source_return['value']
+        group_7_ip_value_b = group_7_b_source_return['value']
+        group_8_ip_value_b = group_8_b_source_return['value']
+        group_9_ip_value_b = group_9_b_source_return['value']
+        group_10_ip_value_b = group_10_b_source_return['value']
+
+        group_1_b_source_list.append(group_1_ip_value_b)
+        group_2_b_source_list.append(group_2_ip_value_b)
+        group_3_b_source_list.append(group_3_ip_value_b)
+        group_4_b_source_list.append(group_4_ip_value_b)
+        group_5_b_source_list.append(group_5_ip_value_b)
+        group_6_b_source_list.append(group_6_ip_value_b)
+        group_7_b_source_list.append(group_7_ip_value_b)
+        group_8_b_source_list.append(group_8_ip_value_b)
+        group_9_b_source_list.append(group_9_ip_value_b)
+        group_10_b_source_list.append(group_10_ip_value_b)
+        print("OKAY HERE WE GO")
+
+        group_1_a_mcast = requests.get(f"{user_input}//htdocs/v.api/apis/EV/GET/parameters/951.0.{tii}")
+        group_2_a_mcast = requests.get(f"{user_input}//htdocs/v.api/apis/EV/GET/parameters/951.1.{tii}")
+        group_3_a_mcast = requests.get(f"{user_input}//htdocs/v.api/apis/EV/GET/parameters/951.2.{tii}")
+        group_4_a_mcast = requests.get(f"{user_input}//htdocs/v.api/apis/EV/GET/parameters/951.3.{tii}")
+        group_5_a_mcast = requests.get(f"{user_input}//htdocs/v.api/apis/EV/GET/parameters/951.4.{tii}")
+        group_6_a_mcast = requests.get(f"{user_input}//htdocs/v.api/apis/EV/GET/parameters/951.5.{tii}")
+        group_7_a_mcast = requests.get(f"{user_input}//htdocs/v.api/apis/EV/GET/parameters/951.6.{tii}")
+        group_8_a_mcast = requests.get(f"{user_input}//htdocs/v.api/apis/EV/GET/parameters/951.7.{tii}")
+        group_9_a_mcast = requests.get(f"{user_input}//htdocs/v.api/apis/EV/GET/parameters/951.8.{tii}")
+        group_10_a_mcast = requests.get(f"{user_input}//htdocs/v.api/apis/EV/GET/parameters/951.9.{tii}")
+        group_1_a_mcast_return = group_1_a_mcast.json()
+        group_2_a_mcast_return = group_2_a_mcast.json()
+        group_3_a_mcast_return = group_3_a_mcast.json()
+        group_4_a_mcast_return = group_4_a_mcast.json()
+        group_5_a_mcast_return = group_5_a_mcast.json()
+        group_6_a_mcast_return = group_6_a_mcast.json()
+        group_7_a_mcast_return = group_7_a_mcast.json()
+        group_8_a_mcast_return = group_8_a_mcast.json()
+        group_9_a_mcast_return = group_9_a_mcast.json()
+        group_10_a_mcast_return = group_10_a_mcast.json()
+        group_1_ip_a_mcast = group_1_a_mcast_return['value']
+        group_2_ip_a_mcast = group_2_a_mcast_return['value']
+        group_3_ip_a_mcast = group_3_a_mcast_return['value']
+        group_4_ip_a_mcast = group_4_a_mcast_return['value']
+        group_5_ip_a_mcast = group_5_a_mcast_return['value']
+        group_6_ip_a_mcast = group_6_a_mcast_return['value']
+        group_7_ip_a_mcast = group_7_a_mcast_return['value']
+        group_8_ip_a_mcast = group_8_a_mcast_return['value']
+        group_9_ip_a_mcast = group_9_a_mcast_return['value']
+        group_10_ip_a_mcast = group_10_a_mcast_return['value']
+
+        group_1_a_mcast_list.append(group_1_ip_a_mcast)
+        group_2_a_mcast_list.append(group_2_ip_a_mcast)
+        group_3_a_mcast_list.append(group_3_ip_a_mcast)
+        group_4_a_mcast_list.append(group_4_ip_a_mcast)
+        group_5_a_mcast_list.append(group_5_ip_a_mcast)
+        group_6_a_mcast_list.append(group_6_ip_a_mcast)
+        group_7_a_mcast_list.append(group_7_ip_a_mcast)
+        group_8_a_mcast_list.append(group_8_ip_a_mcast)
+        group_9_a_mcast_list.append(group_9_ip_a_mcast)
+        group_10_a_mcast_list.append(group_10_ip_a_mcast)
+        print("Getting CLOSE")
+
+
+        group_1_b_mcast = requests.get(f"{user_input}//htdocs/v.api/apis/EV/GET/parameters/953.0.{tii}")
+        group_2_b_mcast = requests.get(f"{user_input}//htdocs/v.api/apis/EV/GET/parameters/953.1.{tii}")
+        group_3_b_mcast = requests.get(f"{user_input}//htdocs/v.api/apis/EV/GET/parameters/953.2.{tii}")
+        group_4_b_mcast = requests.get(f"{user_input}//htdocs/v.api/apis/EV/GET/parameters/953.3.{tii}")
+        group_5_b_mcast = requests.get(f"{user_input}//htdocs/v.api/apis/EV/GET/parameters/953.4.{tii}")
+        group_6_b_mcast = requests.get(f"{user_input}//htdocs/v.api/apis/EV/GET/parameters/953.5.{tii}")
+        group_7_b_mcast = requests.get(f"{user_input}//htdocs/v.api/apis/EV/GET/parameters/953.6.{tii}")
+        group_8_b_mcast = requests.get(f"{user_input}//htdocs/v.api/apis/EV/GET/parameters/953.7.{tii}")
+        group_9_b_mcast = requests.get(f"{user_input}//htdocs/v.api/apis/EV/GET/parameters/953.8.{tii}")
+        group_10_b_mcast = requests.get(f"{user_input}//htdocs/v.api/apis/EV/GET/parameters/953.9.{tii}")
+        group_1_b_mcast_return = group_1_b_mcast.json()
+        group_2_b_mcast_return = group_2_b_mcast.json()
+        group_3_b_mcast_return = group_3_b_mcast.json()
+        group_4_b_mcast_return = group_4_b_mcast.json()
+        group_5_b_mcast_return = group_5_b_mcast.json()
+        group_6_b_mcast_return = group_6_b_mcast.json()
+        group_7_b_mcast_return = group_7_b_mcast.json()
+        group_8_b_mcast_return = group_8_b_mcast.json()
+        group_9_b_mcast_return = group_9_b_mcast.json()
+        group_10_b_mcast_return = group_10_b_mcast.json()
+        group_1_ip_b_mcast = group_1_b_mcast_return['value']
+        group_2_ip_b_mcast = group_2_b_mcast_return['value']
+        group_3_ip_b_mcast = group_3_b_mcast_return['value']
+        group_4_ip_b_mcast = group_4_b_mcast_return['value']
+        group_5_ip_b_mcast = group_5_b_mcast_return['value']
+        group_6_ip_b_mcast = group_6_b_mcast_return['value']
+        group_7_ip_b_mcast = group_7_b_mcast_return['value']
+        group_8_ip_b_mcast = group_8_b_mcast_return['value']
+        group_9_ip_b_mcast = group_9_b_mcast_return['value']
+        group_10_ip_b_mcast = group_10_b_mcast_return['value']
+
+        group_1_b_mcast_list.append(group_1_ip_b_mcast)
+        group_2_b_mcast_list.append(group_2_ip_b_mcast)
+        group_3_b_mcast_list.append(group_3_ip_b_mcast)
+        group_4_b_mcast_list.append(group_4_ip_b_mcast)
+        group_5_b_mcast_list.append(group_5_ip_b_mcast)
+        group_6_b_mcast_list.append(group_6_ip_b_mcast)
+        group_7_b_mcast_list.append(group_7_ip_b_mcast)
+        group_8_b_mcast_list.append(group_8_ip_b_mcast)
+        group_9_b_mcast_list.append(group_9_ip_b_mcast)
+        group_10_b_mcast_list.append(group_10_ip_b_mcast)
+        print("OKAY HERE WE GO")
+
+
+        group_1_mcast_out = requests.get(f"{user_input}//htdocs/v.api/apis/EV/GET/parameters/974.0.{tii}")
+        group_2_mcast_out = requests.get(f"{user_input}//htdocs/v.api/apis/EV/GET/parameters/974.1.{tii}")
+        group_3_mcast_out = requests.get(f"{user_input}//htdocs/v.api/apis/EV/GET/parameters/974.2.{tii}")
+        group_4_mcast_out = requests.get(f"{user_input}//htdocs/v.api/apis/EV/GET/parameters/974.3.{tii}")
+        group_5_mcast_out = requests.get(f"{user_input}//htdocs/v.api/apis/EV/GET/parameters/974.4.{tii}")
+        group_6_mcast_out = requests.get(f"{user_input}//htdocs/v.api/apis/EV/GET/parameters/974.5.{tii}")
+        group_7_mcast_out = requests.get(f"{user_input}//htdocs/v.api/apis/EV/GET/parameters/974.6.{tii}")
+        group_8_mcast_out = requests.get(f"{user_input}//htdocs/v.api/apis/EV/GET/parameters/974.7.{tii}")
+        group_9_mcast_out = requests.get(f"{user_input}//htdocs/v.api/apis/EV/GET/parameters/974.8.{tii}")
+        group_10_mcast_out = requests.get(f"{user_input}//htdocs/v.api/apis/EV/GET/parameters/974.9.{tii}")
+        group_1_mcast_out_return = group_1_mcast_out.json()
+        group_2_mcast_out_return = group_2_mcast_out.json()
+        group_3_mcast_out_return = group_3_mcast_out.json()
+        group_4_mcast_out_return = group_4_mcast_out.json()
+        group_5_mcast_out_return = group_5_mcast_out.json()
+        group_6_mcast_out_return = group_6_mcast_out.json()
+        group_7_mcast_out_return = group_7_mcast_out.json()
+        group_8_mcast_out_return = group_8_mcast_out.json()
+        group_9_mcast_out_return = group_9_mcast_out.json()
+        group_10_mcast_out_return = group_10_mcast_out.json()
+        group_1_ip_mcast_out = group_1_mcast_out_return['value']
+        group_2_ip_mcast_out = group_2_mcast_out_return['value']
+        group_3_ip_mcast_out = group_3_mcast_out_return['value']
+        group_4_ip_mcast_out = group_4_mcast_out_return['value']
+        group_5_ip_mcast_out = group_5_mcast_out_return['value']
+        group_6_ip_mcast_out = group_6_mcast_out_return['value']
+        group_7_ip_mcast_out = group_7_mcast_out_return['value']
+        group_8_ip_mcast_out = group_8_mcast_out_return['value']
+        group_9_ip_mcast_out = group_9_mcast_out_return['value']
+        group_10_ip_mcast_out = group_10_mcast_out_return['value']
+
+        group_1_mcast_out_list.append(group_1_ip_mcast_out)
+        group_2_mcast_out_list.append(group_2_ip_mcast_out)
+        group_3_mcast_out_list.append(group_3_ip_mcast_out)
+        group_4_mcast_out_list.append(group_4_ip_mcast_out)
+        group_5_mcast_out_list.append(group_5_ip_mcast_out)
+        group_6_mcast_out_list.append(group_6_ip_mcast_out)
+        group_7_mcast_out_list.append(group_7_ip_mcast_out)
+        group_8_mcast_out_list.append(group_8_ip_mcast_out)
+        group_9_mcast_out_list.append(group_9_ip_mcast_out)
+        group_10_mcast_out_list.append(group_10_ip_mcast_out)
+        print("OKAY HERE WE GO")
+
+        group_1_stream_rate = requests.get(f"{user_input}//htdocs/v.api/apis/EV/GET/parameters/981.0.{tii}")
+        group_2_stream_rate = requests.get(f"{user_input}//htdocs/v.api/apis/EV/GET/parameters/981.1.{tii}")
+        group_3_stream_rate = requests.get(f"{user_input}//htdocs/v.api/apis/EV/GET/parameters/981.2.{tii}")
+        group_4_stream_rate = requests.get(f"{user_input}//htdocs/v.api/apis/EV/GET/parameters/981.3.{tii}")
+        group_5_stream_rate = requests.get(f"{user_input}//htdocs/v.api/apis/EV/GET/parameters/981.4.{tii}")
+        group_6_stream_rate = requests.get(f"{user_input}//htdocs/v.api/apis/EV/GET/parameters/981.5.{tii}")
+        group_7_stream_rate = requests.get(f"{user_input}//htdocs/v.api/apis/EV/GET/parameters/981.6.{tii}")
+        group_8_stream_rate = requests.get(f"{user_input}//htdocs/v.api/apis/EV/GET/parameters/981.7.{tii}")
+        group_9_stream_rate = requests.get(f"{user_input}//htdocs/v.api/apis/EV/GET/parameters/981.8.{tii}")
+        group_10_stream_rate = requests.get(f"{user_input}//htdocs/v.api/apis/EV/GET/parameters/981.9.{tii}")
+        group_1_stream_rate_return = group_1_stream_rate.json()
+        group_2_stream_rate_return = group_2_stream_rate.json()
+        group_3_stream_rate_return = group_3_stream_rate.json()
+        group_4_stream_rate_return = group_4_stream_rate.json()
+        group_5_stream_rate_return = group_5_stream_rate.json()
+        group_6_stream_rate_return = group_6_stream_rate.json()
+        group_7_stream_rate_return = group_7_stream_rate.json()
+        group_8_stream_rate_return = group_8_stream_rate.json()
+        group_9_stream_rate_return = group_9_stream_rate.json()
+        group_10_stream_rate_return = group_10_stream_rate.json()
+        group_1_stream_rate_in = group_1_stream_rate_return['value']
+        group_2_stream_rate_in = group_2_stream_rate_return['value']
+        group_3_stream_rate_in = group_3_stream_rate_return['value']
+        group_4_stream_rate_in = group_4_stream_rate_return['value']
+        group_5_stream_rate_in = group_5_stream_rate_return['value']
+        group_6_stream_rate_in = group_6_stream_rate_return['value']
+        group_7_stream_rate_in = group_7_stream_rate_return['value']
+        group_8_stream_rate_in = group_8_stream_rate_return['value']
+        group_9_stream_rate_in = group_9_stream_rate_return['value']
+        group_10_stream_rate_in = group_10_stream_rate_return['value']
+
+        group_1_stream_rate_list.append(group_1_stream_rate_in)
+        group_2_stream_rate_list.append(group_2_stream_rate_in)
+        group_3_stream_rate_list.append(group_3_stream_rate_in)
+        group_4_stream_rate_list.append(group_4_stream_rate_in)
+        group_5_stream_rate_list.append(group_5_stream_rate_in)
+        group_6_stream_rate_list.append(group_6_stream_rate_in)
+        group_7_stream_rate_list.append(group_7_stream_rate_in)
+        group_8_stream_rate_list.append(group_8_stream_rate_in)
+        group_9_stream_rate_list.append(group_9_stream_rate_in)
+        group_10_stream_rate_list.append(group_10_stream_rate_in)
+        print("OKAY HERE WE GO")
+
+        group_1_stream_a_presence = requests.get(f"{user_input}//htdocs/v.api/apis/EV/GET/parameters/979.0.{tii}")
+        group_2_stream_a_presence = requests.get(f"{user_input}//htdocs/v.api/apis/EV/GET/parameters/979.1.{tii}")
+        group_3_stream_a_presence = requests.get(f"{user_input}//htdocs/v.api/apis/EV/GET/parameters/979.2.{tii}")
+        group_4_stream_a_presence = requests.get(f"{user_input}//htdocs/v.api/apis/EV/GET/parameters/979.3.{tii}")
+        group_5_stream_a_presence = requests.get(f"{user_input}//htdocs/v.api/apis/EV/GET/parameters/979.4.{tii}")
+        group_6_stream_a_presence = requests.get(f"{user_input}//htdocs/v.api/apis/EV/GET/parameters/979.5.{tii}")
+        group_7_stream_a_presence = requests.get(f"{user_input}//htdocs/v.api/apis/EV/GET/parameters/979.6.{tii}")
+        group_8_stream_a_presence = requests.get(f"{user_input}//htdocs/v.api/apis/EV/GET/parameters/979.7.{tii}")
+        group_9_stream_a_presence = requests.get(f"{user_input}//htdocs/v.api/apis/EV/GET/parameters/979.8.{tii}")
+        group_10_stream_a_presence = requests.get(f"{user_input}//htdocs/v.api/apis/EV/GET/parameters/979.9.{tii}")
+        group_1_stream_a_presence_return = group_1_stream_a_presence.json()
+        group_2_stream_a_presence_return = group_2_stream_a_presence.json()
+        group_3_stream_a_presence_return = group_3_stream_a_presence.json()
+        group_4_stream_a_presence_return = group_4_stream_a_presence.json()
+        group_5_stream_a_presence_return = group_5_stream_a_presence.json()
+        group_6_stream_a_presence_return = group_6_stream_a_presence.json()
+        group_7_stream_a_presence_return = group_7_stream_a_presence.json()
+        group_8_stream_a_presence_return = group_8_stream_a_presence.json()
+        group_9_stream_a_presence_return = group_9_stream_a_presence.json()
+        group_10_stream_a_presence_return = group_10_stream_a_presence.json()
+        group_1_ip_stream_a_presence = group_1_stream_a_presence_return['value']
+        group_2_ip_stream_a_presence = group_2_stream_a_presence_return['value']
+        group_3_ip_stream_a_presence = group_3_stream_a_presence_return['value']
+        group_4_ip_stream_a_presence = group_4_stream_a_presence_return['value']
+        group_5_ip_stream_a_presence = group_5_stream_a_presence_return['value']
+        group_6_ip_stream_a_presence = group_6_stream_a_presence_return['value']
+        group_7_ip_stream_a_presence = group_7_stream_a_presence_return['value']
+        group_8_ip_stream_a_presence = group_8_stream_a_presence_return['value']
+        group_9_ip_stream_a_presence = group_9_stream_a_presence_return['value']
+        group_10_ip_stream_a_presence = group_10_stream_a_presence_return['value']
+        print("OKAY HERE WE GO")
+        group_1_stream_a_presence_list.append(group_1_ip_stream_a_presence)
+        group_2_stream_a_presence_list.append(group_2_ip_stream_a_presence)
+        group_3_stream_a_presence_list.append(group_3_ip_stream_a_presence)
+        group_4_stream_a_presence_list.append(group_4_ip_stream_a_presence)
+        group_5_stream_a_presence_list.append(group_5_ip_stream_a_presence)
+        group_6_stream_a_presence_list.append(group_6_ip_stream_a_presence)
+        group_7_stream_a_presence_list.append(group_7_ip_stream_a_presence)
+        group_8_stream_a_presence_list.append(group_8_ip_stream_a_presence)
+        group_9_stream_a_presence_list.append(group_9_ip_stream_a_presence)
+        group_10_stream_a_presence_list.append(group_10_ip_stream_a_presence)
+
+        print("OKAY HERE WE GO")
+        group_1_stream_b_presence = requests.get(f"{user_input}//htdocs/v.api/apis/EV/GET/parameters/979.0.{tii}")
+        group_2_stream_b_presence = requests.get(f"{user_input}//htdocs/v.api/apis/EV/GET/parameters/979.1.{tii}")
+        group_3_stream_b_presence = requests.get(f"{user_input}//htdocs/v.api/apis/EV/GET/parameters/979.2.{tii}")
+        group_4_stream_b_presence = requests.get(f"{user_input}//htdocs/v.api/apis/EV/GET/parameters/979.3.{tii}")
+        group_5_stream_b_presence = requests.get(f"{user_input}//htdocs/v.api/apis/EV/GET/parameters/979.4.{tii}")
+        group_6_stream_b_presence = requests.get(f"{user_input}//htdocs/v.api/apis/EV/GET/parameters/979.5.{tii}")
+        group_7_stream_b_presence = requests.get(f"{user_input}//htdocs/v.api/apis/EV/GET/parameters/979.6.{tii}")
+        group_8_stream_b_presence = requests.get(f"{user_input}//htdocs/v.api/apis/EV/GET/parameters/979.7.{tii}")
+        group_9_stream_b_presence = requests.get(f"{user_input}//htdocs/v.api/apis/EV/GET/parameters/979.8.{tii}")
+        group_10_stream_b_presence = requests.get(f"{user_input}//htdocs/v.api/apis/EV/GET/parameters/979.9.{tii}")
+        group_1_stream_b_presence_return = group_1_stream_b_presence.json()
+        group_2_stream_b_presence_return = group_2_stream_b_presence.json()
+        group_3_stream_b_presence_return = group_3_stream_b_presence.json()
+        group_4_stream_b_presence_return = group_4_stream_b_presence.json()
+        group_5_stream_b_presence_return = group_5_stream_b_presence.json()
+        group_6_stream_b_presence_return = group_6_stream_b_presence.json()
+        group_7_stream_b_presence_return = group_7_stream_b_presence.json()
+        group_8_stream_b_presence_return = group_8_stream_b_presence.json()
+        group_9_stream_b_presence_return = group_9_stream_b_presence.json()
+        group_10_stream_b_presence_return = group_10_stream_b_presence.json()
+        group_1_ip_stream_b_presence = group_1_stream_b_presence_return['value']
+        group_2_ip_stream_b_presence = group_2_stream_b_presence_return['value']
+        group_3_ip_stream_b_presence = group_3_stream_b_presence_return['value']
+        group_4_ip_stream_b_presence = group_4_stream_b_presence_return['value']
+        group_5_ip_stream_b_presence = group_5_stream_b_presence_return['value']
+        group_6_ip_stream_b_presence = group_6_stream_b_presence_return['value']
+        group_7_ip_stream_b_presence = group_7_stream_b_presence_return['value']
+        group_8_ip_stream_b_presence = group_8_stream_b_presence_return['value']
+        group_9_ip_stream_b_presence = group_9_stream_b_presence_return['value']
+        group_10_ip_stream_b_presence = group_10_stream_b_presence_return['value']
+
+        group_1_stream_b_presence_list.append(group_1_ip_stream_b_presence)
+        group_2_stream_b_presence_list.append(group_2_ip_stream_b_presence)
+        group_3_stream_b_presence_list.append(group_3_ip_stream_b_presence)
+        group_4_stream_b_presence_list.append(group_4_ip_stream_b_presence)
+        group_5_stream_b_presence_list.append(group_5_ip_stream_b_presence)
+        group_6_stream_b_presence_list.append(group_6_ip_stream_b_presence)
+        group_7_stream_b_presence_list.append(group_7_ip_stream_b_presence)
+        group_8_stream_b_presence_list.append(group_8_ip_stream_b_presence)
+        group_9_stream_b_presence_list.append(group_9_ip_stream_b_presence)
+        group_10_stream_b_presence_list.append(group_10_ip_stream_b_presence)
+
+    print(group_1_a_source_list)
+    print(group_2_a_source_list)
+    print(group_3_a_source_list)
+    print(group_4_a_source_list)
+    print(group_5_a_source_list)
+    print(group_6_a_source_list)
+    print(group_7_a_source_list)
+    print(group_8_a_source_list)
+    print(group_9_a_source_list)
+    print(group_10_a_source_list)
+
+    print(group_1_b_source_list)
+    print(group_2_b_source_list)
+    print(group_3_b_source_list)
+    print(group_4_b_source_list)
+    print(group_5_b_source_list)
+    print(group_6_b_source_list)
+    print(group_7_b_source_list)
+    print(group_8_b_source_list)
+    print(group_9_b_source_list)
+    print(group_10_b_source_list)
+
+    print(group_1_a_mcast_list)
+    print(group_2_a_mcast_list)
+    print(group_3_a_mcast_list)
+    print(group_4_a_mcast_list)
+    print(group_5_a_mcast_list)
+    print(group_6_a_mcast_list)
+    print(group_7_a_mcast_list)
+    print(group_8_a_mcast_list)
+    print(group_9_a_mcast_list)
+    print(group_10_a_mcast_list)
+
+    print(group_1_b_mcast_list)
+    print(group_2_b_mcast_list)
+    print(group_3_b_mcast_list)
+    print(group_4_b_mcast_list)
+    print(group_5_b_mcast_list)
+    print(group_6_b_mcast_list)
+    print(group_7_b_mcast_list)
+    print(group_8_b_mcast_list)
+    print(group_9_b_mcast_list)
+    print(group_10_b_mcast_list)
+
+    print(group_1_mcast_out_list)
+    print(group_2_mcast_out_list)
+    print(group_3_mcast_out_list)
+    print(group_4_mcast_out_list)
+    print(group_5_mcast_out_list)
+    print(group_6_mcast_out_list)
+    print(group_7_mcast_out_list)
+    print(group_8_mcast_out_list)
+    print(group_9_mcast_out_list)
+    print(group_10_mcast_out_list)
+
+    print(group_1_stream_a_presence_list)
+    print(group_2_stream_a_presence_list)
+    print(group_3_stream_a_presence_list)
+    print(group_4_stream_a_presence_list)
+    print(group_5_stream_a_presence_list)
+    print(group_6_stream_a_presence_list)
+    print(group_7_stream_a_presence_list)
+    print(group_8_stream_a_presence_list)
+    print(group_9_stream_a_presence_list)
+    print(group_10_stream_a_presence_list)
+
+    print(group_1_stream_b_presence_list)
+    print(group_2_stream_b_presence_list)
+    print(group_3_stream_b_presence_list)
+    print(group_4_stream_b_presence_list)
+    print(group_5_stream_b_presence_list)
+    print(group_6_stream_b_presence_list)
+    print(group_7_stream_b_presence_list)
+    print(group_8_stream_b_presence_list)
+    print(group_9_stream_b_presence_list)
+    print(group_10_stream_b_presence_list)
+
+    print(group_1_stream_rate_list)
+    print(group_2_stream_rate_list)
+    print(group_3_stream_rate_list)
+    print(group_4_stream_rate_list)
+    print(group_5_stream_rate_list)
+    print(group_6_stream_rate_list)
+    print(group_7_stream_rate_list)
+    print(group_8_stream_rate_list)
+    print(group_9_stream_rate_list)
+    print(group_10_stream_rate_list)
+
+
+
+    print(len(group_1_a_source_list))
+    print(len(group_1_b_source_list))
+    print(len(group_1_a_mcast_list))
+    print(len(group_1_mcast_out_list))
+    print(len(group_1_stream_a_presence_list))
+    print(len(group_1_stream_b_presence_list))
+    print(len(group_1_stream_rate_list))
+
+    path = 'Gateway.xlsx'
+    writer = ExcelWriter(path, engine='openpyxl')
+
+    gateway_to_sheet_df = pd.DataFrame({"GROUP 1 STREAM RATE": group_1_stream_rate_list, "GROUP 1 A SOURCE:": group_1_a_source_list,"GROUP 1 A MCAST:": group_1_a_mcast_list,"GROUP 1 B SOURCE:": group_1_b_source_list,"GROUP 1 B MCAST:": group_1_b_mcast_list,"GROUP 1 MCAST OUT:": group_1_mcast_out_list,"GROUP 1 A STREAM PRESENCE:": group_1_stream_a_presence_list,"GROUP 1 B STREAM PRESENCE:": group_1_stream_b_presence_list})
+    gateway_to_sheet_df.to_excel(writer, sheet_name="GROUP 1", index=False)
+
+
+    gateway_to_sheet_df2 = pd.DataFrame({"GROUP 2 STREAM RATE": group_2_stream_rate_list,"GROUP 2 A SOURCE:": group_2_a_source_list,"GROUP 2 A MCAST:": group_2_a_mcast_list,"GROUP 2 B SOURCE:": group_2_b_source_list,"GROUP 2 B MCAST:": group_2_b_mcast_list,"GROUP 2 MCAST OUT:": group_2_mcast_out_list,"GROUP 2 A STREAM PRESENCE:": group_2_stream_a_presence_list,"GROUP 2 B STREAM PRESENCE:": group_2_stream_b_presence_list})
+    gateway_to_sheet_df2.to_excel(writer, sheet_name="GROUP 2", index=False)
+
+
+
+    gateway_to_sheet_df3 = pd.DataFrame({"GROUP 3 STREAM RATE": group_3_stream_rate_list,"GROUP 3 A SOURCE:": group_3_a_source_list,"GROUP 3 A MCAST:": group_3_a_mcast_list,"GROUP 3 B SOURCE:": group_3_b_source_list,"GROUP 3 B MCAST:": group_3_b_mcast_list,"GROUP 3 MCAST OUT:": group_3_mcast_out_list,"GROUP 3 A STREAM PRESENCE:": group_3_stream_a_presence_list,"GROUP 3 B STREAM PRESENCE:": group_3_stream_b_presence_list})
+    gateway_to_sheet_df3.to_excel(writer, sheet_name="GROUP 3", index=False)
+
+
+
+    gateway_to_sheet_df4 = pd.DataFrame({"GROUP 4 STREAM RATE": group_4_stream_rate_list,"GROUP 4 A SOURCE:": group_4_a_source_list,"GROUP 4 A MCAST:": group_4_a_mcast_list,"GROUP 4 B SOURCE:": group_4_b_source_list,"GROUP 4 B MCAST:": group_4_b_mcast_list,"GROUP 4 MCAST OUT:": group_4_mcast_out_list,"GROUP 4 A STREAM PRESENCE:": group_4_stream_a_presence_list,"GROUP 4 B STREAM PRESENCE:": group_4_stream_b_presence_list})
+    gateway_to_sheet_df4.to_excel(writer, sheet_name="GROUP 4", index=False)
+
+
+
+    gateway_to_sheet_df5 = pd.DataFrame({"GROUP 5 STREAM RATE": group_5_stream_rate_list,"GROUP 5 A SOURCE:": group_5_a_source_list,"GROUP 5 A MCAST:": group_5_a_mcast_list,"GROUP 5 B SOURCE:": group_5_b_source_list,"GROUP 5 B MCAST:": group_5_b_mcast_list,"GROUP 5 MCAST OUT:": group_5_mcast_out_list,"GROUP 5 A STREAM PRESENCE:": group_5_stream_a_presence_list,"GROUP 5 B STREAM PRESENCE:": group_5_stream_b_presence_list})
+    gateway_to_sheet_df5.to_excel(writer, sheet_name="GROUP 5", index=False)
+
+
+
+    gateway_to_sheet_df6 = pd.DataFrame({"GROUP 6 STREAM RATE": group_6_stream_rate_list,"GROUP 6 A SOURCE:": group_6_a_source_list,"GROUP 6 A MCAST:": group_6_a_mcast_list,"GROUP 6 B SOURCE:": group_6_b_source_list,"GROUP 6 B MCAST:": group_6_b_mcast_list,"GROUP 6 MCAST OUT:": group_6_mcast_out_list,"GROUP 6 A STREAM PRESENCE:": group_6_stream_a_presence_list,"GROUP 6 B STREAM PRESENCE:": group_6_stream_b_presence_list})
+    gateway_to_sheet_df6.to_excel(writer, sheet_name="GROUP 6", index=False)
+
+
+    gateway_to_sheet_df7 = pd.DataFrame({"GROUP 7 STREAM RATE": group_7_stream_rate_list,"GROUP 7 A SOURCE:": group_7_a_source_list,"GROUP 7 A MCAST:": group_7_a_mcast_list,"GROUP 7 B SOURCE:": group_7_b_source_list,"GROUP 7 B MCAST:": group_7_b_mcast_list,"GROUP 7 MCAST OUT:": group_7_mcast_out_list,"GROUP 7 A STREAM PRESENCE:": group_7_stream_a_presence_list,"GROUP 7 B STREAM PRESENCE:": group_7_stream_b_presence_list})
+    gateway_to_sheet_df7.to_excel(writer, sheet_name="GROUP 7", index=False)
+
+
+    gateway_to_sheet_df8 = pd.DataFrame({"GROUP 8 STREAM RATE": group_8_stream_rate_list,"GROUP 8 A SOURCE:": group_8_a_source_list,"GROUP 8 A MCAST:": group_8_a_mcast_list,"GROUP 8 B SOURCE:": group_8_b_source_list,"GROUP 8 B MCAST:": group_8_b_mcast_list,"GROUP 8 MCAST OUT:": group_8_mcast_out_list,"GROUP 8 A STREAM PRESENCE:": group_8_stream_a_presence_list,"GROUP 8 B STREAM PRESENCE:": group_8_stream_b_presence_list})
+    gateway_to_sheet_df8.to_excel(writer, sheet_name="GROUP 8", index=False)
+
+
+
+    gateway_to_sheet_df9 = pd.DataFrame({"GROUP 9 STREAM RATE": group_9_stream_rate_list,"GROUP 9 A SOURCE:": group_9_a_source_list,"GROUP 9 A MCAST:": group_9_a_mcast_list,"GROUP 9 B SOURCE:": group_9_b_source_list,"GROUP 9 B MCAST:": group_9_b_mcast_list,"GROUP 9 MCAST OUT:": group_9_mcast_out_list,"GROUP 9 A STREAM PRESENCE:": group_9_stream_a_presence_list,"GROUP 9 B STREAM PRESENCE:": group_9_stream_b_presence_list})
+    gateway_to_sheet_df9.to_excel(writer, sheet_name="GROUP 9", index=False)
+
+
+
+    gateway_to_sheet_df10 = pd.DataFrame({"GROUP 10 STREAM RATE": group_10_stream_rate_list,"GROUP 10 A SOURCE:": group_10_a_source_list,"GROUP 10 A MCAST:": group_10_a_mcast_list,"GROUP 10 B SOURCE:": group_10_b_source_list,"GROUP 10 B MCAST:": group_10_b_mcast_list,"GROUP 10 MCAST OUT:": group_10_mcast_out_list,"GROUP 10 A STREAM PRESENCE:": group_10_stream_a_presence_list,"GROUP 10 B STREAM PRESENCE:": group_10_stream_b_presence_list})
+    gateway_to_sheet_df10.to_excel(writer, sheet_name="GROUP 10", index=False)
+    writer.save()
+    writer.close()
+
+
+
+def Nat_Pull():
+    streams2 = 255
+    nat_group_1_status = list()
+    tii2 = 0
+    print("OKAY HERE WE GO")
+    user_input2 = Group2.get()
+    nat_core_1_lan_to_wan_input_mcast_list = []
+    nat_core_2_lan_to_wan_input_mcast_list = []
+    nat_core_3_lan_to_wan_input_mcast_list = []
+    nat_core_4_lan_to_wan_input_mcast_list = []
+    nat_core_5_lan_to_wan_input_mcast_list = []
+    nat_core_6_lan_to_wan_input_mcast_list = []
+
+    nat_core_1_lan_to_wan_input_source_list = []
+    nat_core_2_lan_to_wan_input_source_list = []
+    nat_core_3_lan_to_wan_input_source_list = []
+    nat_core_4_lan_to_wan_input_source_list = []
+    nat_core_5_lan_to_wan_input_source_list = []
+    nat_core_6_lan_to_wan_input_source_list = []
+
+    nat_core_1_lan_to_wan_input_bitrate_list = []
+    nat_core_2_lan_to_wan_input_bitrate_list = []
+    nat_core_3_lan_to_wan_input_bitrate_list = []
+    nat_core_4_lan_to_wan_input_bitrate_list = []
+    nat_core_5_lan_to_wan_input_bitrate_list = []
+    nat_core_6_lan_to_wan_input_bitrate_list = []
+
+    nat_core_1_lan_to_wan_output_source_list = []
+    nat_core_2_lan_to_wan_output_source_list = []
+    nat_core_3_lan_to_wan_output_source_list = []
+    nat_core_4_lan_to_wan_output_source_list = []
+    nat_core_5_lan_to_wan_output_source_list = []
+    nat_core_6_lan_to_wan_output_source_list = []
+
+    nat_core_1_lan_to_wan_output_mcast_list = []
+    nat_core_2_lan_to_wan_output_mcast_list = []
+    nat_core_3_lan_to_wan_output_mcast_list = []
+    nat_core_4_lan_to_wan_output_mcast_list = []
+    nat_core_5_lan_to_wan_output_mcast_list = []
+    nat_core_6_lan_to_wan_output_mcast_list = []
+
+    nat_core_1_wan_to_lan_input_source_list = []
+    nat_core_2_wan_to_lan_input_source_list = []
+    nat_core_3_wan_to_lan_input_source_list = []
+    nat_core_4_wan_to_lan_input_source_list = []
+    nat_core_5_wan_to_lan_input_source_list = []
+    nat_core_6_wan_to_lan_input_source_list = []
+
+    nat_core_1_wan_to_lan_input_group_list = []
+    nat_core_2_wan_to_lan_input_group_list = []
+    nat_core_3_wan_to_lan_input_group_list = []
+    nat_core_4_wan_to_lan_input_group_list = []
+    nat_core_5_wan_to_lan_input_group_list = []
+    nat_core_6_wan_to_lan_input_group_list = []
+
+    nat_core_1_wan_to_lan_input_bit_rate_list = []
+    nat_core_2_wan_to_lan_input_bit_rate_list = []
+    nat_core_3_wan_to_lan_input_bit_rate_list = []
+    nat_core_4_wan_to_lan_input_bit_rate_list = []
+    nat_core_5_wan_to_lan_input_bit_rate_list = []
+    nat_core_6_wan_to_lan_input_bit_rate_list = []
+
+    nat_core_1_wan_to_lan_output_source_list = []
+    nat_core_2_wan_to_lan_output_source_list = []
+    nat_core_3_wan_to_lan_output_source_list = []
+    nat_core_4_wan_to_lan_output_source_list = []
+    nat_core_5_wan_to_lan_output_source_list = []
+    nat_core_6_wan_to_lan_output_source_list = []
+
+    nat_core_1_wan_to_lan_output_group_list = []
+    nat_core_2_wan_to_lan_output_group_list = []
+    nat_core_3_wan_to_lan_output_group_list = []
+    nat_core_4_wan_to_lan_output_group_list = []
+    nat_core_5_wan_to_lan_output_group_list = []
+    nat_core_6_wan_to_lan_output_group_list = []
+
+    print("OKAY HERE WE GO")
+
+    for i in range(streams2):
+        tii2 += 1
+        core_1_lan_to_wan_input_mcast = requests.get(f"{user_input2}//htdocs/v.api/apis/EV/GET/parameters/601.0.{tii2}")
+        core_2_lan_to_wan_input_mcast = requests.get(f"{user_input2}//htdocs/v.api/apis/EV/GET/parameters/601.1.{tii2}")
+        core_3_lan_to_wan_input_mcast = requests.get(f"{user_input2}//htdocs/v.api/apis/EV/GET/parameters/601.2.{tii2}")
+        core_4_lan_to_wan_input_mcast = requests.get(f"{user_input2}//htdocs/v.api/apis/EV/GET/parameters/601.3.{tii2}")
+        core_5_lan_to_wan_input_mcast = requests.get(f"{user_input2}//htdocs/v.api/apis/EV/GET/parameters/601.4.{tii2}")
+        core_6_lan_to_wan_input_mcast = requests.get(f"{user_input2}//htdocs/v.api/apis/EV/GET/parameters/601.5.{tii2}")
+
+        group_1_lan_to_wan_input_return = core_1_lan_to_wan_input_mcast.json()
+        group_2_lan_to_wan_input_return = core_2_lan_to_wan_input_mcast.json()
+        group_3_lan_to_wan_input_return = core_3_lan_to_wan_input_mcast.json()
+        group_4_lan_to_wan_input_return = core_4_lan_to_wan_input_mcast.json()
+        group_5_lan_to_wan_input_return = core_5_lan_to_wan_input_mcast.json()
+        group_6_lan_to_wan_input_return = core_6_lan_to_wan_input_mcast.json()
+
+        group_1_lan_to_wan_inputs = group_1_lan_to_wan_input_return['value']
+        group_2_lan_to_wan_inputs = group_2_lan_to_wan_input_return['value']
+        group_3_lan_to_wan_inputs = group_3_lan_to_wan_input_return['value']
+        group_4_lan_to_wan_inputs = group_4_lan_to_wan_input_return['value']
+        group_5_lan_to_wan_inputs = group_5_lan_to_wan_input_return['value']
+        group_6_lan_to_wan_inputs = group_6_lan_to_wan_input_return['value']
+
+        nat_core_1_lan_to_wan_input_mcast_list.append(group_1_lan_to_wan_inputs)
+        nat_core_2_lan_to_wan_input_mcast_list.append(group_2_lan_to_wan_inputs)
+        nat_core_3_lan_to_wan_input_mcast_list.append(group_3_lan_to_wan_inputs)
+        nat_core_4_lan_to_wan_input_mcast_list.append(group_4_lan_to_wan_inputs)
+        nat_core_5_lan_to_wan_input_mcast_list.append(group_5_lan_to_wan_inputs)
+        nat_core_6_lan_to_wan_input_mcast_list.append(group_6_lan_to_wan_inputs)
+
+        print("OKAY HERE WE GO")
+
+        core_1_lan_to_wan_input_source = requests.get(f"{user_input2}//htdocs/v.api/apis/EV/GET/parameters/417.0.{tii2}")
+        core_2_lan_to_wan_input_source = requests.get(f"{user_input2}//htdocs/v.api/apis/EV/GET/parameters/417.1.{tii2}")
+        core_3_lan_to_wan_input_source = requests.get(f"{user_input2}//htdocs/v.api/apis/EV/GET/parameters/417.2.{tii2}")
+        core_4_lan_to_wan_input_source = requests.get(f"{user_input2}//htdocs/v.api/apis/EV/GET/parameters/417.3.{tii2}")
+        core_5_lan_to_wan_input_source = requests.get(f"{user_input2}//htdocs/v.api/apis/EV/GET/parameters/417.4.{tii2}")
+        core_6_lan_to_wan_input_source = requests.get(f"{user_input2}//htdocs/v.api/apis/EV/GET/parameters/417.5.{tii2}")
+
+        group_1_lan_to_wan_input_return_source_return = core_1_lan_to_wan_input_source.json()
+        group_2_lan_to_wan_input_return_source_return = core_2_lan_to_wan_input_source.json()
+        group_3_lan_to_wan_input_return_source_return = core_3_lan_to_wan_input_source.json()
+        group_4_lan_to_wan_input_return_source_return = core_4_lan_to_wan_input_source.json()
+        group_5_lan_to_wan_input_return_source_return = core_5_lan_to_wan_input_source.json()
+        group_6_lan_to_wan_input_return_source_return = core_6_lan_to_wan_input_source.json()
+
+        group_1_lan_to_wan_inputs_ssource = group_1_lan_to_wan_input_return_source_return['value']
+        group_2_lan_to_wan_inputs_ssource = group_2_lan_to_wan_input_return_source_return['value']
+        group_3_lan_to_wan_inputs_ssource = group_3_lan_to_wan_input_return_source_return['value']
+        group_4_lan_to_wan_inputs_ssource = group_4_lan_to_wan_input_return_source_return['value']
+        group_5_lan_to_wan_inputs_ssource = group_5_lan_to_wan_input_return_source_return['value']
+        group_6_lan_to_wan_inputs_ssource = group_6_lan_to_wan_input_return_source_return['value']
+
+        nat_core_1_lan_to_wan_input_source_list.append(group_1_lan_to_wan_inputs_ssource)
+        nat_core_2_lan_to_wan_input_source_list.append(group_2_lan_to_wan_inputs_ssource)
+        nat_core_3_lan_to_wan_input_source_list.append(group_3_lan_to_wan_inputs_ssource)
+        nat_core_4_lan_to_wan_input_source_list.append(group_4_lan_to_wan_inputs_ssource)
+        nat_core_5_lan_to_wan_input_source_list.append(group_5_lan_to_wan_inputs_ssource)
+        nat_core_6_lan_to_wan_input_source_list.append(group_6_lan_to_wan_inputs_ssource)
+
+        print("OKAY HERE WE GO")
+
+        core_1_lan_to_wan_input_bitrate = requests.get(f"{user_input2}//htdocs/v.api/apis/EV/GET/parameters/603.0.{tii2}")
+        core_2_lan_to_wan_input_bitrate = requests.get(f"{user_input2}//htdocs/v.api/apis/EV/GET/parameters/603.1.{tii2}")
+        core_3_lan_to_wan_input_bitrate = requests.get(f"{user_input2}//htdocs/v.api/apis/EV/GET/parameters/603.2.{tii2}")
+        core_4_lan_to_wan_input_bitrate = requests.get(f"{user_input2}//htdocs/v.api/apis/EV/GET/parameters/603.3.{tii2}")
+        core_5_lan_to_wan_input_bitrate = requests.get(f"{user_input2}//htdocs/v.api/apis/EV/GET/parameters/603.4.{tii2}")
+        core_6_lan_to_wan_input_bitrate = requests.get(f"{user_input2}//htdocs/v.api/apis/EV/GET/parameters/603.5.{tii2}")
+
+        group_1_lan_to_wan_input_bitrate_return = core_1_lan_to_wan_input_bitrate.json()
+        group_2_lan_to_wan_input_bitrate_return = core_2_lan_to_wan_input_bitrate.json()
+        group_3_lan_to_wan_input_bitrate_return = core_3_lan_to_wan_input_bitrate.json()
+        group_4_lan_to_wan_input_bitrate_return = core_4_lan_to_wan_input_bitrate.json()
+        group_5_lan_to_wan_input_bitrate_return = core_5_lan_to_wan_input_bitrate.json()
+        group_6_lan_to_wan_input_bitrate_return = core_6_lan_to_wan_input_bitrate.json()
+
+        group_1_lan_to_wan_inputs_bittrate = group_1_lan_to_wan_input_bitrate_return['value']
+        group_2_lan_to_wan_inputs_bittrate = group_2_lan_to_wan_input_bitrate_return['value']
+        group_3_lan_to_wan_inputs_bittrate = group_3_lan_to_wan_input_bitrate_return['value']
+        group_4_lan_to_wan_inputs_bittrate = group_4_lan_to_wan_input_bitrate_return['value']
+        group_5_lan_to_wan_inputs_bittrate = group_5_lan_to_wan_input_bitrate_return['value']
+        group_6_lan_to_wan_inputs_bittrate = group_6_lan_to_wan_input_bitrate_return['value']
+
+        nat_core_1_lan_to_wan_input_bitrate_list.append(group_1_lan_to_wan_inputs_bittrate)
+        nat_core_2_lan_to_wan_input_bitrate_list.append(group_2_lan_to_wan_inputs_bittrate)
+        nat_core_3_lan_to_wan_input_bitrate_list.append(group_3_lan_to_wan_inputs_bittrate)
+        nat_core_4_lan_to_wan_input_bitrate_list.append(group_4_lan_to_wan_inputs_bittrate)
+        nat_core_5_lan_to_wan_input_bitrate_list.append(group_5_lan_to_wan_inputs_bittrate)
+        nat_core_6_lan_to_wan_input_bitrate_list.append(group_6_lan_to_wan_inputs_bittrate)
+
+        print("Getting CLOSE")
+
+        core_1_lan_to_wan_output_source_list = requests.get(f"{user_input2}//htdocs/v.api/apis/EV/GET/parameters/523.0.{tii2}")
+        core_2_lan_to_wan_output_source_list = requests.get(f"{user_input2}//htdocs/v.api/apis/EV/GET/parameters/523.1.{tii2}")
+        core_3_lan_to_wan_output_source_list = requests.get(f"{user_input2}//htdocs/v.api/apis/EV/GET/parameters/523.2.{tii2}")
+        core_4_lan_to_wan_output_source_list = requests.get(f"{user_input2}//htdocs/v.api/apis/EV/GET/parameters/523.3.{tii2}")
+        core_5_lan_to_wan_output_source_list = requests.get(f"{user_input2}//htdocs/v.api/apis/EV/GET/parameters/523.4.{tii2}")
+        core_6_lan_to_wan_output_source_list = requests.get(f"{user_input2}//htdocs/v.api/apis/EV/GET/parameters/523.5.{tii2}")
+
+        group_1_lan_to_wan_output_source_return = core_1_lan_to_wan_output_source_list.json()
+        group_2_lan_to_wan_output_source_return = core_2_lan_to_wan_output_source_list.json()
+        group_3_lan_to_wan_output_source_return = core_3_lan_to_wan_output_source_list.json()
+        group_4_lan_to_wan_output_source_return = core_4_lan_to_wan_output_source_list.json()
+        group_5_lan_to_wan_output_source_return = core_5_lan_to_wan_output_source_list.json()
+        group_6_lan_to_wan_output_source_return = core_6_lan_to_wan_output_source_list.json()
+
+        group_1_lan_to_wan_output_sourcee = group_1_lan_to_wan_output_source_return['value']
+        group_2_lan_to_wan_output_sourcee = group_2_lan_to_wan_output_source_return['value']
+        group_3_lan_to_wan_output_sourcee = group_3_lan_to_wan_output_source_return['value']
+        group_4_lan_to_wan_output_sourcee = group_4_lan_to_wan_output_source_return['value']
+        group_5_lan_to_wan_output_sourcee = group_5_lan_to_wan_output_source_return['value']
+        group_6_lan_to_wan_output_sourcee = group_6_lan_to_wan_output_source_return['value']
+
+        nat_core_1_lan_to_wan_output_source_list.append(group_1_lan_to_wan_output_sourcee)
+        nat_core_2_lan_to_wan_output_source_list.append(group_2_lan_to_wan_output_sourcee)
+        nat_core_3_lan_to_wan_output_source_list.append(group_3_lan_to_wan_output_sourcee)
+        nat_core_4_lan_to_wan_output_source_list.append(group_4_lan_to_wan_output_sourcee)
+        nat_core_5_lan_to_wan_output_source_list.append(group_5_lan_to_wan_output_sourcee)
+        nat_core_6_lan_to_wan_output_source_list.append(group_5_lan_to_wan_output_sourcee)
+
+        print("OKAY HERE WE GO")
+
+        core_1_lan_to_wan_output_mcast_list = requests.get(f"{user_input2}//htdocs/v.api/apis/EV/GET/parameters/524.0.{tii2}")
+        core_2_lan_to_wan_output_mcast_list = requests.get(f"{user_input2}//htdocs/v.api/apis/EV/GET/parameters/524.1.{tii2}")
+        core_3_lan_to_wan_output_mcast_list = requests.get(f"{user_input2}//htdocs/v.api/apis/EV/GET/parameters/524.2.{tii2}")
+        core_4_lan_to_wan_output_mcast_list = requests.get(f"{user_input2}//htdocs/v.api/apis/EV/GET/parameters/524.3.{tii2}")
+        core_5_lan_to_wan_output_mcast_list = requests.get(f"{user_input2}//htdocs/v.api/apis/EV/GET/parameters/524.4.{tii2}")
+        core_6_lan_to_wan_output_mcast_list = requests.get(f"{user_input2}//htdocs/v.api/apis/EV/GET/parameters/524.5.{tii2}")
+
+        group_1_lan_to_wan_output_mcast_return = core_1_lan_to_wan_output_mcast_list.json()
+        group_2_lan_to_wan_output_mcast_return = core_2_lan_to_wan_output_mcast_list.json()
+        group_3_lan_to_wan_output_mcast_return = core_3_lan_to_wan_output_mcast_list.json()
+        group_4_lan_to_wan_output_mcast_return = core_4_lan_to_wan_output_mcast_list.json()
+        group_5_lan_to_wan_output_mcast_return = core_5_lan_to_wan_output_mcast_list.json()
+        group_6_lan_to_wan_output_mcast_return = core_6_lan_to_wan_output_mcast_list.json()
+
+        group_1_lan_to_wan_output_mcastt = group_1_lan_to_wan_output_mcast_return['value']
+        group_2_lan_to_wan_output_mcastt = group_2_lan_to_wan_output_mcast_return['value']
+        group_3_lan_to_wan_output_mcastt = group_3_lan_to_wan_output_mcast_return['value']
+        group_4_lan_to_wan_output_mcastt = group_4_lan_to_wan_output_mcast_return['value']
+        group_5_lan_to_wan_output_mcastt = group_5_lan_to_wan_output_mcast_return['value']
+        group_6_lan_to_wan_output_mcastt = group_6_lan_to_wan_output_mcast_return['value']
+
+        nat_core_1_lan_to_wan_output_mcast_list.append(group_1_lan_to_wan_output_mcastt)
+        nat_core_2_lan_to_wan_output_mcast_list.append(group_2_lan_to_wan_output_mcastt)
+        nat_core_3_lan_to_wan_output_mcast_list.append(group_3_lan_to_wan_output_mcastt)
+        nat_core_4_lan_to_wan_output_mcast_list.append(group_4_lan_to_wan_output_mcastt)
+        nat_core_5_lan_to_wan_output_mcast_list.append(group_5_lan_to_wan_output_mcastt)
+        nat_core_6_lan_to_wan_output_mcast_list.append(group_6_lan_to_wan_output_mcastt)
+
+        print("OKAY HERE WE GO")
+
+        core_1_wan_to_lan_input_source_list = requests.get(f"{user_input2}//htdocs/v.api/apis/EV/GET/parameters/411.0.{tii2}")
+        core_2_wan_to_lan_input_source_list = requests.get(f"{user_input2}//htdocs/v.api/apis/EV/GET/parameters/411.1.{tii2}")
+        core_3_wan_to_lan_input_source_list = requests.get(f"{user_input2}//htdocs/v.api/apis/EV/GET/parameters/411.2.{tii2}")
+        core_4_wan_to_lan_input_source_list = requests.get(f"{user_input2}//htdocs/v.api/apis/EV/GET/parameters/411.3.{tii2}")
+        core_5_wan_to_lan_input_source_list = requests.get(f"{user_input2}//htdocs/v.api/apis/EV/GET/parameters/411.4.{tii2}")
+        core_6_wan_to_lan_input_source_list = requests.get(f"{user_input2}//htdocs/v.api/apis/EV/GET/parameters/411.5.{tii2}")
+
+        group_1_wan_to_lan_input_source_return = core_1_wan_to_lan_input_source_list.json()
+        group_2_wan_to_lan_input_source_return = core_2_wan_to_lan_input_source_list.json()
+        group_3_wan_to_lan_input_source_return = core_3_wan_to_lan_input_source_list.json()
+        group_4_wan_to_lan_input_source_return = core_4_wan_to_lan_input_source_list.json()
+        group_5_wan_to_lan_input_source_return = core_5_wan_to_lan_input_source_list.json()
+        group_6_wan_to_lan_input_source_return = core_6_wan_to_lan_input_source_list.json()
+
+        group_1_wan_to_lan_input_sourcee = group_1_wan_to_lan_input_source_return['value']
+        group_2_wan_to_lan_input_sourcee = group_2_wan_to_lan_input_source_return['value']
+        group_3_wan_to_lan_input_sourcee = group_3_wan_to_lan_input_source_return['value']
+        group_4_wan_to_lan_input_sourcee = group_4_wan_to_lan_input_source_return['value']
+        group_5_wan_to_lan_input_sourcee = group_5_wan_to_lan_input_source_return['value']
+        group_6_wan_to_lan_input_sourcee = group_6_wan_to_lan_input_source_return['value']
+
+        nat_core_1_wan_to_lan_input_source_list.append(group_1_wan_to_lan_input_sourcee)
+        nat_core_2_wan_to_lan_input_source_list.append(group_2_wan_to_lan_input_sourcee)
+        nat_core_3_wan_to_lan_input_source_list.append(group_3_wan_to_lan_input_sourcee)
+        nat_core_4_wan_to_lan_input_source_list.append(group_4_wan_to_lan_input_sourcee)
+        nat_core_5_wan_to_lan_input_source_list.append(group_5_wan_to_lan_input_sourcee)
+        nat_core_6_wan_to_lan_input_source_list.append(group_6_wan_to_lan_input_sourcee)
+
+        print("OKAY HERE WE GO")
+
+        core_1_wan_to_lan_input_group_list = requests.get(f"{user_input2}//htdocs/v.api/apis/EV/GET/parameters/401.0.{tii2}")
+        core_2_wan_to_lan_input_group_list = requests.get(f"{user_input2}//htdocs/v.api/apis/EV/GET/parameters/401.1.{tii2}")
+        core_3_wan_to_lan_input_group_list = requests.get(f"{user_input2}//htdocs/v.api/apis/EV/GET/parameters/401.2.{tii2}")
+        core_4_wan_to_lan_input_group_list = requests.get(f"{user_input2}//htdocs/v.api/apis/EV/GET/parameters/401.3.{tii2}")
+        core_5_wan_to_lan_input_group_list = requests.get(f"{user_input2}//htdocs/v.api/apis/EV/GET/parameters/401.4.{tii2}")
+        core_6_wan_to_lan_input_group_list = requests.get(f"{user_input2}//htdocs/v.api/apis/EV/GET/parameters/401.5.{tii2}")
+
+        group_1_wan_to_lan_input_group_return = core_1_wan_to_lan_input_group_list.json()
+        group_2_wan_to_lan_input_group_return = core_2_wan_to_lan_input_group_list.json()
+        group_3_wan_to_lan_input_group_return = core_3_wan_to_lan_input_group_list.json()
+        group_4_wan_to_lan_input_group_return = core_4_wan_to_lan_input_group_list.json()
+        group_5_wan_to_lan_input_group_return = core_5_wan_to_lan_input_group_list.json()
+        group_6_wan_to_lan_input_group_return = core_6_wan_to_lan_input_group_list.json()
+
+        group_1_wan_to_lan_input_groupp = group_1_wan_to_lan_input_group_return['value']
+        group_2_wan_to_lan_input_groupp = group_2_wan_to_lan_input_group_return['value']
+        group_3_wan_to_lan_input_groupp = group_3_wan_to_lan_input_group_return['value']
+        group_4_wan_to_lan_input_groupp = group_4_wan_to_lan_input_group_return['value']
+        group_5_wan_to_lan_input_groupp = group_5_wan_to_lan_input_group_return['value']
+        group_6_wan_to_lan_input_groupp = group_6_wan_to_lan_input_group_return['value']
+
+        nat_core_1_wan_to_lan_input_group_list.append(group_1_wan_to_lan_input_groupp)
+        nat_core_2_wan_to_lan_input_group_list.append(group_2_wan_to_lan_input_groupp)
+        nat_core_3_wan_to_lan_input_group_list.append(group_3_wan_to_lan_input_groupp)
+        nat_core_4_wan_to_lan_input_group_list.append(group_4_wan_to_lan_input_groupp)
+        nat_core_5_wan_to_lan_input_group_list.append(group_5_wan_to_lan_input_groupp)
+        nat_core_6_wan_to_lan_input_group_list.append(group_6_wan_to_lan_input_groupp)
+
+        print("OKAY HERE WE GO")
+
+        core_1_wan_to_lan_input_bit_rate_list = requests.get(f"{user_input2}//htdocs/v.api/apis/EV/GET/parameters/407.0.{tii2}")
+        core_2_wan_to_lan_input_bit_rate_list = requests.get(f"{user_input2}//htdocs/v.api/apis/EV/GET/parameters/407.1.{tii2}")
+        core_3_wan_to_lan_input_bit_rate_list = requests.get(f"{user_input2}//htdocs/v.api/apis/EV/GET/parameters/407.2.{tii2}")
+        core_4_wan_to_lan_input_bit_rate_list = requests.get(f"{user_input2}//htdocs/v.api/apis/EV/GET/parameters/407.3.{tii2}")
+        core_5_wan_to_lan_input_bit_rate_list = requests.get(f"{user_input2}//htdocs/v.api/apis/EV/GET/parameters/407.4.{tii2}")
+        core_6_wan_to_lan_input_bit_rate_list = requests.get(f"{user_input2}//htdocs/v.api/apis/EV/GET/parameters/407.5.{tii2}")
+
+        bit_rate_1_wan_to_lan_input_bit_rate_return = core_1_wan_to_lan_input_bit_rate_list.json()
+        bit_rate_2_wan_to_lan_input_bit_rate_return = core_2_wan_to_lan_input_bit_rate_list.json()
+        bit_rate_3_wan_to_lan_input_bit_rate_return = core_3_wan_to_lan_input_bit_rate_list.json()
+        bit_rate_4_wan_to_lan_input_bit_rate_return = core_4_wan_to_lan_input_bit_rate_list.json()
+        bit_rate_5_wan_to_lan_input_bit_rate_return = core_5_wan_to_lan_input_bit_rate_list.json()
+        bit_rate_6_wan_to_lan_input_bit_rate_return = core_6_wan_to_lan_input_bit_rate_list.json()
+
+        bit_rate_1_wan_to_lan_input_bit_ratee = bit_rate_1_wan_to_lan_input_bit_rate_return['value']
+        bit_rate_2_wan_to_lan_input_bit_ratee = bit_rate_2_wan_to_lan_input_bit_rate_return['value']
+        bit_rate_3_wan_to_lan_input_bit_ratee = bit_rate_3_wan_to_lan_input_bit_rate_return['value']
+        bit_rate_4_wan_to_lan_input_bit_ratee = bit_rate_4_wan_to_lan_input_bit_rate_return['value']
+        bit_rate_5_wan_to_lan_input_bit_ratee = bit_rate_5_wan_to_lan_input_bit_rate_return['value']
+        bit_rate_6_wan_to_lan_input_bit_ratee = bit_rate_6_wan_to_lan_input_bit_rate_return['value']
+
+        nat_core_1_wan_to_lan_input_bit_rate_list.append(bit_rate_1_wan_to_lan_input_bit_ratee)
+        nat_core_2_wan_to_lan_input_bit_rate_list.append(bit_rate_2_wan_to_lan_input_bit_ratee)
+        nat_core_3_wan_to_lan_input_bit_rate_list.append(bit_rate_3_wan_to_lan_input_bit_ratee)
+        nat_core_4_wan_to_lan_input_bit_rate_list.append(bit_rate_4_wan_to_lan_input_bit_ratee)
+        nat_core_5_wan_to_lan_input_bit_rate_list.append(bit_rate_5_wan_to_lan_input_bit_ratee)
+        nat_core_6_wan_to_lan_input_bit_rate_list.append(bit_rate_6_wan_to_lan_input_bit_ratee)
+
+        print("OKAY HERE WE GO")
+
+        core_1_wan_to_lan_output_source_list = requests.get(f"{user_input2}//htdocs/v.api/apis/EV/GET/parameters/505.0.{tii2}")
+        core_2_wan_to_lan_output_source_list = requests.get(f"{user_input2}//htdocs/v.api/apis/EV/GET/parameters/505.1.{tii2}")
+        core_3_wan_to_lan_output_source_list = requests.get(f"{user_input2}//htdocs/v.api/apis/EV/GET/parameters/505.2.{tii2}")
+        core_4_wan_to_lan_output_source_list = requests.get(f"{user_input2}//htdocs/v.api/apis/EV/GET/parameters/505.3.{tii2}")
+        core_5_wan_to_lan_output_source_list = requests.get(f"{user_input2}//htdocs/v.api/apis/EV/GET/parameters/505.4.{tii2}")
+        core_6_wan_to_lan_output_source_list = requests.get(f"{user_input2}//htdocs/v.api/apis/EV/GET/parameters/505.4.{tii2}")
+
+        source_1_wan_to_lan_output_source_return = core_1_wan_to_lan_output_source_list.json()
+        source_2_wan_to_lan_output_source_return = core_2_wan_to_lan_output_source_list.json()
+        source_3_wan_to_lan_output_source_return = core_3_wan_to_lan_output_source_list.json()
+        source_4_wan_to_lan_output_source_return = core_4_wan_to_lan_output_source_list.json()
+        source_5_wan_to_lan_output_source_return = core_5_wan_to_lan_output_source_list.json()
+        source_6_wan_to_lan_output_source_return = core_6_wan_to_lan_output_source_list.json()
+
+        source_1_wan_to_lan_output_sourcee = source_1_wan_to_lan_output_source_return['value']
+        source_2_wan_to_lan_output_sourcee = source_2_wan_to_lan_output_source_return['value']
+        source_3_wan_to_lan_output_sourcee = source_3_wan_to_lan_output_source_return['value']
+        source_4_wan_to_lan_output_sourcee = source_4_wan_to_lan_output_source_return['value']
+        source_5_wan_to_lan_output_sourcee = source_5_wan_to_lan_output_source_return['value']
+        source_6_wan_to_lan_output_sourcee = source_6_wan_to_lan_output_source_return['value']
+
+        nat_core_1_wan_to_lan_output_source_list.append(source_1_wan_to_lan_output_sourcee)
+        nat_core_2_wan_to_lan_output_source_list.append(source_2_wan_to_lan_output_sourcee)
+        nat_core_3_wan_to_lan_output_source_list.append(source_3_wan_to_lan_output_sourcee)
+        nat_core_4_wan_to_lan_output_source_list.append(source_4_wan_to_lan_output_sourcee)
+        nat_core_5_wan_to_lan_output_source_list.append(source_5_wan_to_lan_output_sourcee)
+        nat_core_6_wan_to_lan_output_source_list.append(source_6_wan_to_lan_output_sourcee)
+
+        print("OKAY HERE WE GO")
+
+        core_1_wan_to_lan_output_group_list = requests.get(f"{user_input2}//htdocs/v.api/apis/EV/GET/parameters/506.0.{tii2}")
+        core_2_wan_to_lan_output_group_list = requests.get(f"{user_input2}//htdocs/v.api/apis/EV/GET/parameters/506.1.{tii2}")
+        core_3_wan_to_lan_output_group_list = requests.get(f"{user_input2}//htdocs/v.api/apis/EV/GET/parameters/506.2.{tii2}")
+        core_4_wan_to_lan_output_group_list = requests.get(f"{user_input2}//htdocs/v.api/apis/EV/GET/parameters/506.3.{tii2}")
+        core_5_wan_to_lan_output_group_list = requests.get(f"{user_input2}//htdocs/v.api/apis/EV/GET/parameters/506.4.{tii2}")
+        core_6_wan_to_lan_output_group_list = requests.get(f"{user_input2}//htdocs/v.api/apis/EV/GET/parameters/506.4.{tii2}")
+
+        group_1_wan_to_lan_output_group_return = core_1_wan_to_lan_output_group_list.json()
+        group_2_wan_to_lan_output_group_return = core_2_wan_to_lan_output_group_list.json()
+        group_3_wan_to_lan_output_group_return = core_3_wan_to_lan_output_group_list.json()
+        group_4_wan_to_lan_output_group_return = core_4_wan_to_lan_output_group_list.json()
+        group_5_wan_to_lan_output_group_return = core_5_wan_to_lan_output_group_list.json()
+        group_6_wan_to_lan_output_group_return = core_6_wan_to_lan_output_group_list.json()
+
+        group_1_wan_to_lan_output_group = group_1_wan_to_lan_output_group_return['value']
+        group_2_wan_to_lan_output_group = group_2_wan_to_lan_output_group_return['value']
+        group_3_wan_to_lan_output_group = group_3_wan_to_lan_output_group_return['value']
+        group_4_wan_to_lan_output_group = group_4_wan_to_lan_output_group_return['value']
+        group_5_wan_to_lan_output_group = group_5_wan_to_lan_output_group_return['value']
+        group_6_wan_to_lan_output_group = group_6_wan_to_lan_output_group_return['value']
+
+        nat_core_1_wan_to_lan_output_group_list.append(group_1_wan_to_lan_output_group)
+        nat_core_2_wan_to_lan_output_group_list.append(group_2_wan_to_lan_output_group)
+        nat_core_3_wan_to_lan_output_group_list.append(group_3_wan_to_lan_output_group)
+        nat_core_4_wan_to_lan_output_group_list.append(group_4_wan_to_lan_output_group)
+        nat_core_5_wan_to_lan_output_group_list.append(group_5_wan_to_lan_output_group)
+        nat_core_6_wan_to_lan_output_group_list.append(group_6_wan_to_lan_output_group)
+
+    path = 'NAT.xlsx'
+    writer = ExcelWriter(path, engine='openpyxl')
+
+    nat_to_sheet_df = pd.DataFrame({"GROUP 1 LAN TO WAN INPUT MCAST": nat_core_1_lan_to_wan_input_mcast_list,
+                                    "GROUP 1 LAN TO WAN INPUT SOURCE:": nat_core_1_lan_to_wan_input_source_list,
+                                    "GROUP 1 LAN TO WAN INPUT BIT RATE:": nat_core_1_lan_to_wan_input_bitrate_list,
+                                    "GROUP 1 LAN TO WAN OUTPUT SOURCE:": nat_core_1_lan_to_wan_output_source_list,
+                                    "GROUP 1 LAN TO WAN OUTPUT MCAST:": nat_core_1_lan_to_wan_output_mcast_list,
+                                    "GROUP 1 WAN TO LAN INPUT SOURCE:": nat_core_1_wan_to_lan_input_source_list,
+                                    "GROUP 1 WAN TO LAN INPUT MCAST:": nat_core_1_wan_to_lan_input_group_list,
+                                    "GROUP 1 WAN TO LAN INPUT BIT RATE:": nat_core_1_wan_to_lan_input_bit_rate_list,
+                                    "GROUP 1 WAN TO LAN OUTPUT SOURCE:": nat_core_1_wan_to_lan_output_source_list,
+                                    "GROUP 1 WAN TO LAN OUTPUT MCAST:": nat_core_1_wan_to_lan_output_group_list})
+    nat_to_sheet_df.to_excel(writer, sheet_name="GROUP 1", index=False)
+
+    nat_to_sheet_df2 = pd.DataFrame({"GROUP 2 LAN TO WAN INPUT MCAST": nat_core_2_lan_to_wan_input_mcast_list,
+                                     "GROUP 2 LAN TO WAN INPUT SOURCE:": nat_core_2_lan_to_wan_input_source_list,
+                                     "GROUP 2 LAN TO WAN INPUT BIT RATE:": nat_core_2_lan_to_wan_input_bitrate_list,
+                                     "GROUP 2 LAN TO WAN OUTPUT SOURCE:": nat_core_2_lan_to_wan_output_source_list,
+                                     "GROUP 2 LAN TO WAN OUTPUT MCAST:": nat_core_2_lan_to_wan_output_mcast_list,
+                                     "GROUP 2 WAN TO LAN INPUT SOURCE:": nat_core_2_wan_to_lan_input_source_list,
+                                     "GROUP 2 WAN TO LAN INPUT MCAST:": nat_core_2_wan_to_lan_input_group_list,
+                                     "GROUP 2 WAN TO LAN INPUT BIT RATE:": nat_core_2_wan_to_lan_input_bit_rate_list,
+                                     "GROUP 2 WAN TO LAN OUTPUT SOURCE:": nat_core_2_wan_to_lan_output_source_list,
+                                     "GROUP 2 WAN TO LAN OUTPUT MCAST:": nat_core_2_wan_to_lan_output_group_list})
+    nat_to_sheet_df2.to_excel(writer, sheet_name="GROUP 2", index=False)
+
+    nat_to_sheet_df3 = pd.DataFrame({"GROUP 3 LAN TO WAN INPUT MCAST": nat_core_3_lan_to_wan_input_mcast_list,
+                                     "GROUP 3 LAN TO WAN INPUT SOURCE:": nat_core_3_lan_to_wan_input_source_list,
+                                     "GROUP 3 LAN TO WAN INPUT BIT RATE:": nat_core_3_lan_to_wan_input_bitrate_list,
+                                     "GROUP 3 LAN TO WAN OUTPUT SOURCE:": nat_core_3_lan_to_wan_output_source_list,
+                                     "GROUP 3 LAN TO WAN OUTPUT MCAST:": nat_core_3_lan_to_wan_output_mcast_list,
+                                     "GROUP 3 WAN TO LAN INPUT SOURCE:": nat_core_3_wan_to_lan_input_source_list,
+                                     "GROUP 3 WAN TO LAN INPUT MCAST:": nat_core_3_wan_to_lan_input_group_list,
+                                     "GROUP 3 WAN TO LAN INPUT BIT RATE:": nat_core_3_wan_to_lan_input_bit_rate_list,
+                                     "GROUP 3 WAN TO LAN OUTPUT SOURCE:": nat_core_3_wan_to_lan_output_source_list,
+                                     "GROUP 3 WAN TO LAN OUTPUT MCAST:": nat_core_3_wan_to_lan_output_group_list})
+    nat_to_sheet_df3.to_excel(writer, sheet_name="GROUP 3", index=False)
+
+    nat_to_sheet_df4 = pd.DataFrame({"GROUP 4 LAN TO WAN INPUT MCAST": nat_core_4_lan_to_wan_input_mcast_list,
+                                     "GROUP 4 LAN TO WAN INPUT SOURCE:": nat_core_4_lan_to_wan_input_source_list,
+                                     "GROUP 4 LAN TO WAN INPUT BIT RATE:": nat_core_4_lan_to_wan_input_bitrate_list,
+                                     "GROUP 4 LAN TO WAN OUTPUT SOURCE:": nat_core_4_lan_to_wan_output_source_list,
+                                     "GROUP 4 LAN TO WAN OUTPUT MCAST:": nat_core_4_lan_to_wan_output_mcast_list,
+                                     "GROUP 4 WAN TO LAN INPUT SOURCE:": nat_core_4_wan_to_lan_input_source_list,
+                                     "GROUP 4 WAN TO LAN INPUT MCAST:": nat_core_4_wan_to_lan_input_group_list,
+                                     "GROUP 4 WAN TO LAN INPUT BIT RATE:": nat_core_4_wan_to_lan_input_bit_rate_list,
+                                     "GROUP 4 WAN TO LAN OUTPUT SOURCE:": nat_core_4_wan_to_lan_output_source_list,
+                                     "GROUP 4 WAN TO LAN OUTPUT MCAST:": nat_core_4_wan_to_lan_output_group_list})
+    nat_to_sheet_df4.to_excel(writer, sheet_name="GROUP 4", index=False)
+
+    nat_to_sheet_df5 = pd.DataFrame({"GROUP 5 LAN TO WAN INPUT MCAST": nat_core_5_lan_to_wan_input_mcast_list,
+                                     "GROUP 5 LAN TO WAN INPUT SOURCE:": nat_core_5_lan_to_wan_input_source_list,
+                                     "GROUP 5 LAN TO WAN INPUT BIT RATE:": nat_core_5_lan_to_wan_input_bitrate_list,
+                                     "GROUP 5 LAN TO WAN OUTPUT SOURCE:": nat_core_5_lan_to_wan_output_source_list,
+                                     "GROUP 5 LAN TO WAN OUTPUT MCAST:": nat_core_5_lan_to_wan_output_mcast_list,
+                                     "GROUP 5 WAN TO LAN INPUT SOURCE:": nat_core_5_wan_to_lan_input_source_list,
+                                     "GROUP 5 WAN TO LAN INPUT MCAST:": nat_core_5_wan_to_lan_input_group_list,
+                                     "GROUP 5 WAN TO LAN INPUT BIT RATE:": nat_core_5_wan_to_lan_input_bit_rate_list,
+                                     "GROUP 5 WAN TO LAN OUTPUT SOURCE:": nat_core_5_wan_to_lan_output_source_list,
+                                     "GROUP 5 WAN TO LAN OUTPUT MCAST:": nat_core_5_wan_to_lan_output_group_list})
+    nat_to_sheet_df5.to_excel(writer, sheet_name="GROUP 5", index=False)
+
+    nat_to_sheet_df6 = pd.DataFrame({"GROUP 6 LAN TO WAN INPUT MCAST": nat_core_6_lan_to_wan_input_mcast_list,
+                                     "GROUP 6 LAN TO WAN INPUT SOURCE:": nat_core_6_lan_to_wan_input_source_list,
+                                     "GROUP 6 LAN TO WAN INPUT BIT RATE:": nat_core_6_lan_to_wan_input_bitrate_list,
+                                     "GROUP 6 LAN TO WAN OUTPUT SOURCE:": nat_core_6_lan_to_wan_output_source_list,
+                                     "GROUP 6 LAN TO WAN OUTPUT MCAST:": nat_core_6_lan_to_wan_output_mcast_list,
+                                     "GROUP 6 WAN TO LAN INPUT SOURCE:": nat_core_6_wan_to_lan_input_source_list,
+                                     "GROUP 6 WAN TO LAN INPUT MCAST:": nat_core_6_wan_to_lan_input_group_list,
+                                     "GROUP 6 WAN TO LAN INPUT BIT RATE:": nat_core_6_wan_to_lan_input_bit_rate_list,
+                                     "GROUP 6 WAN TO LAN OUTPUT SOURCE:": nat_core_6_wan_to_lan_output_source_list,
+                                     "GROUP 6 WAN TO LAN OUTPUT MCAST:": nat_core_6_wan_to_lan_output_group_list})
+    nat_to_sheet_df6.to_excel(writer, sheet_name="GROUP 6", index=False)
+    writer.save()
+    writer.close()
+
+
+##Creating Buttons
+myButton_Gateway_IP = Button(root, text='Evertz MG MGMT IP:', command=Gateway_Pull)
+user_input = Group.get()
+
+myButton_nat_IP = Button(root, text='Evertz NAT MGMT IP:', command=Nat_Pull)
+user_input2 = Group2.get()
+
+
+##Displaying Buttons
+myButton_Gateway_IP.grid(row=0, column=1)
+myButton_nat_IP.grid(row=1, column=1)
+
+
+root.mainloop()
